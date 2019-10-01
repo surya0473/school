@@ -21,8 +21,8 @@ public class FeatureMappingEntity {
 	@Column(name = "feature")
 	private String feature;
 
-	@Column(name = "company_id")
-	private String companyId;
+	@Column(name = "school_id")
+	private String schoolId;
 
 	@Column(name = "status")
 	private String status;
@@ -51,12 +51,12 @@ public class FeatureMappingEntity {
 		this.feature = feature;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
 	}
 
 	public String getStatus() {

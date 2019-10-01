@@ -4,22 +4,24 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class SessionFactoryUtilz {
 
 	Logger logger = LoggerFactory.getLogger(SessionFactoryUtilz.class);
 
-	private SessionFactory sessionFactory = null;
-
-	public SessionFactoryUtilz(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	@Autowired
+	private SessionFactory s;
 
 	public Session getSession(String tenant) {
+		if (tenant == null) {
+			tenant = "school";
+		}
 		logger.info("inside getSession() for tenant:" + tenant);
-		return sessionFactory.withOptions().tenantIdentifier(tenant).openSession();
+		return s.withOptions().tenantIdentifier(tenant).openSession();
 	}
 
 	public void closeSession(Session session) {

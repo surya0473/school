@@ -5,7 +5,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class RegCompanyClientReq implements Serializable {
 	
-	private String companyId;
+	private String schoolId;
 	private String name;
 	private String contactNumber;
 	private String emailId;
@@ -41,12 +41,12 @@ public class RegCompanyClientReq implements Serializable {
 		this.adminPassword = adminPassword;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
 	}
 
 	public String getName() {

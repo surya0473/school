@@ -5,16 +5,16 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class UserRoleUpdateReq implements Serializable {
 
-	private String companyId;
+	private String schoolId;
 	private String userId;
 	private String userRoles;
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String companyId) {
+		this.schoolId = companyId;
 	}
 
 	public String getUserId() {
@@ -35,7 +35,6 @@ public class UserRoleUpdateReq implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserRoleUpdateReq [companyId=" + companyId + ", userId=" + userId + ", userRoles=" + userRoles
-				+ "]";
+		return "UserRoleUpdateReq [SchoolId=" + schoolId + ", userId=" + userId + ", userRoles=" + userRoles + "]";
 	}
 }

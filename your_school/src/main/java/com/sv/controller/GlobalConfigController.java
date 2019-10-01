@@ -93,8 +93,8 @@ public class GlobalConfigController {
 					|| "null".equalsIgnoreCase(reqBean.getAppName())) {
 				respBean = ClientRespUtil.getInstance().buildResp(null, AppConstants.STATUS_ERROR,
 						"FEATURES_NOT_UPDATED", "App name is missing.");
-			} else if (reqBean.getCompanyId() == null || reqBean.getCompanyId().isEmpty()
-					|| "null".equalsIgnoreCase(reqBean.getCompanyId())) {
+			} else if (reqBean.getSchoolId() == null || reqBean.getSchoolId().isEmpty()
+					|| "null".equalsIgnoreCase(reqBean.getSchoolId())) {
 				respBean = ClientRespUtil.getInstance().buildResp(null, AppConstants.STATUS_ERROR,
 						"FEATURES_NOT_UPDATED", "Company id is missing.");
 			} else if (reqBean.getFeatures() == null || reqBean.getFeatures().size() < 1) {
@@ -184,8 +184,8 @@ public class GlobalConfigController {
 		logger.info("inside controller updateApps():" + reqBean.toString());
 		ClientRespBean respBean = null;
 		try {
-			if (reqBean.getCompanyId() == null || reqBean.getCompanyId().isEmpty()
-					|| "null".equalsIgnoreCase(reqBean.getCompanyId())) {
+			if (reqBean.getSchoolId() == null || reqBean.getSchoolId().isEmpty()
+					|| "null".equalsIgnoreCase(reqBean.getSchoolId())) {
 				respBean = ClientRespUtil.getInstance().buildResp(null, AppConstants.STATUS_ERROR, "APPS_NOT_MAPPED",
 						"Company id is missing.");
 			} else {

@@ -5,16 +5,16 @@ import java.util.List;
 
 public class UpdateFeatureMapReqBean {
 
-	private String companyId;
+	private String schoolId;
 	private String appName;
 	private List<FeatureReqBean> features = new ArrayList<>();
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String companyId) {
+		this.schoolId = companyId;
 	}
 
 	public String getAppName() {
@@ -35,7 +35,7 @@ public class UpdateFeatureMapReqBean {
 
 	@Override
 	public String toString() {
-		return "UpdateFeatureMapReqBean [companyId=" + companyId + ", appName=" + appName + ", features=" + features
+		return "UpdateFeatureMapReqBean [schoolId=" + schoolId + ", appName=" + appName + ", features=" + features
 				+ "]";
 	}
 }

@@ -56,7 +56,7 @@ public class GlobalConfigService {
 		logger.info("inside service getApps():" + companyId);
 		List<AppsEntity> apps = dao.getApps();
 		if (apps != null && apps.size() > 0) {
-			SchoolEntity company = companyDao.getCompanyDetails(companyId);
+			SchoolEntity company = companyDao.getSchoolDetails(companyId);
 			if (company == null) {
 				apps = null;
 			}
@@ -77,7 +77,7 @@ public class GlobalConfigService {
 
 	public String updateApps(UpdateAppsReq reqBean) throws Exception {
 		logger.info("inside service updateApps()");
-		SchoolEntity company = companyDao.getCompanyDetails(reqBean.getCompanyId());
+		SchoolEntity company = companyDao.getSchoolDetails(reqBean.getSchoolId());
 		if (company == null) {
 			logger.info("Company details does not exist");
 			throw new Exception("Company details doesn't exist.");

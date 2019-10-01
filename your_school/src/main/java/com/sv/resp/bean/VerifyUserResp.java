@@ -10,7 +10,7 @@ public class VerifyUserResp implements Serializable {
 	}
 
 	private String userId;
-	private String companyId;
+	private String schoolId;
 	private String name;
 	private String email;
 	private String contactNumber;
@@ -28,12 +28,12 @@ public class VerifyUserResp implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
 	}
 
 	public String getName() {

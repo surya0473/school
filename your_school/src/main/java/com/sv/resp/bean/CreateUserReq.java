@@ -9,7 +9,7 @@ public class CreateUserReq implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	private String companyId;
+	private String schoolId;
 	private String mobileNo;
 	private String email;
 	private String userRoles;
@@ -22,12 +22,12 @@ public class CreateUserReq implements Serializable {
 		this.userRoles = userRoles;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
 	}
 
 	public String getMobileNo() {
@@ -48,7 +48,7 @@ public class CreateUserReq implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CreateUserReq [companyId=" + companyId + ", mobileNo=" + mobileNo + ", email=" + email + "]";
+		return "CreateUserReq [SchoolId=" + schoolId + ", mobileNo=" + mobileNo + ", email=" + email + "]";
 	}
 
 }

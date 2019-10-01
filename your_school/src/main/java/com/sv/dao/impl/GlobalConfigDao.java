@@ -24,7 +24,6 @@ import com.sv.resp.bean.FeatureReqBean;
 import com.sv.resp.bean.FeaturesMapRespBean;
 import com.sv.resp.bean.UpdateFeatureMapReqBean;
 
-
 /*
  * @author surya v
  * @date 21/08/2019
@@ -56,8 +55,8 @@ public class GlobalConfigDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<FeaturesMapRespBean> getAppFeatures(String companyId, String appName) {
-		logger.info("inside dao getAppFeatures(),appName:" + appName + ",companyId:" + companyId);
+	public List<FeaturesMapRespBean> getAppFeatures(String schoolId, String appName) {
+		logger.info("inside dao getAppFeatures(),appName:" + appName + ",schoolId:" + schoolId);
 		Session session = null;
 		List<FeaturesMapRespBean> features = new ArrayList<>();
 		try {
@@ -65,7 +64,7 @@ public class GlobalConfigDao {
 			SQLQuery query = session.createSQLQuery(
 					"select f.app_name as appName,f.description,f.feature,ifnull(m.status,'-1') from app_features f "
 							+ " left join features_mapping m  on m.feature = f.feature and m.app_name=f.app_name"
-							+ " and m.app_name='" + appName + "'  and m.company_id='" + companyId + "' "
+							+ " and m.app_name='" + appName + "'  and m.school_id='" + schoolId + "' "
 							+ " where f.status='1' having appName = '" + appName + "'");
 			List<Object[]> list = query.list();
 			for (Object[] row : list) {
@@ -92,13 +91,13 @@ public class GlobalConfigDao {
 		try {
 			session = sfUtil.getSession(AppConstants.DEFAULT_SCHEMA);
 			Query query = session.createQuery("from FeatureMappingEntity where appName=:appName "
-					+ " and feature=:feature and companyId=:companyId");
+					+ " and feature=:feature and schoolId=:schoolId");
 			txn = session.beginTransaction();
 			for (FeatureReqBean feature : reqBean.getFeatures()) {
 				logger.info("feature:" + feature.getFeature() + ", status :" + feature.getStatus());
 				query.setParameter("appName", reqBean.getAppName());
 				query.setParameter("feature", feature.getFeature());
-				query.setParameter("companyId", reqBean.getCompanyId());
+				query.setParameter("schoolId", reqBean.getSchoolId());
 				logger.info("Veryfying feature mapping status...");
 				List<FeatureMappingEntity> list = query.list();
 				if (list != null && list.size() > 0) {
@@ -110,7 +109,7 @@ public class GlobalConfigDao {
 					logger.info("feature doesn't mapped, inserting..");
 					FeatureMappingEntity dbFeature = new FeatureMappingEntity();
 					dbFeature.setAppName(reqBean.getAppName());
-					dbFeature.setCompanyId(reqBean.getCompanyId());
+					dbFeature.setSchoolId(reqBean.getSchoolId());
 					dbFeature.setFeature(feature.getFeature());
 					dbFeature.setStatus(feature.getStatus());
 					logger.info("Calling save..");

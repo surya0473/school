@@ -10,7 +10,7 @@ public class UserUpdateReqBean implements Serializable {
 	}
 
 	private String userId;
-	private String companyId;
+	private String schoolId;
 	private String status;
 
 	public String getUserId() {
@@ -21,12 +21,12 @@ public class UserUpdateReqBean implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String companyId) {
+		this.schoolId = companyId;
 	}
 
 	public String getStatus() {
@@ -39,7 +39,7 @@ public class UserUpdateReqBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserUpdateReqBean [userId=" + userId + ", companyId=" + companyId + ", status=" + status + "]";
+		return "UserUpdateReqBean [userId=" + userId + ", SchoolId=" + schoolId + ", status=" + status + "]";
 	}
 
 }

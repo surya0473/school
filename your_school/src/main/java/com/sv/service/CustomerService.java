@@ -25,7 +25,7 @@ public class CustomerService {
 
 	public CustomerEntity create(CreateUserReq req) throws Exception {
 		logger.info("inside create()...checking Customer.....");
-		SchoolEntity company = cDao.getCompanyDetails(req.getCompanyId());
+		SchoolEntity company = cDao.getSchoolDetails(req.getSchoolId());
 		if (company == null) {
 			logger.info("Company details does not exist");
 			throw new Exception("Company details doesn't exist.");
@@ -38,7 +38,7 @@ public class CustomerService {
 		if (cust == null) {
 			logger.info("Customer doesn't exist with given mobile,Creating new ....");
 			cust = new CustomerEntity();
-			cust.setCompanyId(req.getCompanyId());
+			cust.setSchoolId(req.getSchoolId());
 			cust.setCreatedDateTime(DateUtil.getCurrentDateTime(company.getTimeZone()));
 			cust.setMobileNo(req.getMobileNo());
 			cust.setStatus(AppConstants.STATUS_ACTIVE);
@@ -53,7 +53,7 @@ public class CustomerService {
 			}
 		} else {
 			logger.info("Customer already exists with given Mobile");
-			if (cust.getCompanyId().equalsIgnoreCase(req.getCompanyId())) {
+			if (cust.getSchoolId().equalsIgnoreCase(req.getSchoolId())) {
 				logger.info("User already exists with given Mobile .");
 				return cust;
 			} else {
@@ -67,7 +67,7 @@ public class CustomerService {
 		logger.info("inside update()......");
 		if (req.getStatus() != null && !req.getStatus().isEmpty() && !"null".equalsIgnoreCase(req.getStatus())) {
 			logger.info("inside update()...");
-			SchoolEntity company = cDao.getCompanyDetails(req.getCompanyId());
+			SchoolEntity company = cDao.getSchoolDetails(req.getSchoolId());
 			if (company == null) {
 				logger.info("Company details does not exist");
 				throw new Exception("Company details doesn't exist.");
@@ -81,7 +81,7 @@ public class CustomerService {
 				logger.info("Customer details does not exist");
 				throw new Exception("Customer details doesn't exist.");
 			}
-			if (!req.getCompanyId().equalsIgnoreCase(cust.getCompanyId())) {
+			if (!req.getSchoolId().equalsIgnoreCase(cust.getSchoolId())) {
 				logger.info("Company details does not exist");
 				throw new Exception("Company details are not matching.");
 			}
@@ -103,7 +103,7 @@ public class CustomerService {
 		if (req.getNewMobileNo() != null && !req.getNewMobileNo().isEmpty()
 				&& !"null".equalsIgnoreCase(req.getNewMobileNo())) {
 			logger.info("inside update()...");
-			SchoolEntity company = cDao.getCompanyDetails(req.getCompanyId());
+			SchoolEntity company = cDao.getSchoolDetails(req.getSchoolId());
 			if (company == null) {
 				logger.info("Company details does not exist");
 				throw new Exception("Company details doesn't exist.");
@@ -120,7 +120,7 @@ public class CustomerService {
 					logger.info("Customer details does not exist");
 					throw new Exception("Customer details doesn't exist.");
 				}
-				if (!req.getCompanyId().equalsIgnoreCase(oldCust.getCompanyId())) {
+				if (!req.getSchoolId().equalsIgnoreCase(oldCust.getSchoolId())) {
 					logger.info("Company details does not exist");
 					throw new Exception("Company details are not matching.");
 				}
@@ -133,7 +133,7 @@ public class CustomerService {
 				return oldCust;
 			} else {
 				logger.info("Customer already exists with given Mobile");
-				if (newCust.getCompanyId().equalsIgnoreCase(req.getCompanyId())) {
+				if (newCust.getSchoolId().equalsIgnoreCase(req.getSchoolId())) {
 					logger.info("User already exists with given Mobile .");
 					return newCust;
 				} else {

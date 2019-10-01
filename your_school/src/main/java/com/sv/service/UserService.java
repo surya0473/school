@@ -48,7 +48,7 @@ public class UserService {
 
 	public UserEntity create(CreateUserReq reqBean) throws Exception {
 		logger.info("inside create()...checking user.....");
-		SchoolEntity company = companyDao.getCompanyDetails(reqBean.getCompanyId());
+		SchoolEntity company = companyDao.getSchoolDetails(reqBean.getSchoolId());
 		if (company == null) {
 			logger.info("Company details does not exist");
 			throw new Exception("Company details doesn't exist.");
@@ -65,7 +65,7 @@ public class UserService {
 		if (user == null) {
 			logger.info("User doesn't exist with given mobile and email,Creating new User....");
 			user = new UserEntity();
-			user.setCompanyId(reqBean.getCompanyId());
+			user.setSchoolId(reqBean.getSchoolId());
 			user.setCreatedDateTime(DateUtil.getCurrentDateTime(company.getTimeZone()));
 			user.setEmailId(reqBean.getEmail());
 			user.setMobileNumber(reqBean.getMobileNo());
@@ -108,7 +108,7 @@ public class UserService {
 			}
 		} else {
 			logger.info("User already exists with given Mobile/Email");
-			if (user.getCompanyId().equalsIgnoreCase(reqBean.getCompanyId())) {
+			if (user.getSchoolId().equalsIgnoreCase(reqBean.getSchoolId())) {
 				logger.info("User already exists with given Mobile/Email .");
 				return user;
 			} else {
@@ -130,11 +130,11 @@ public class UserService {
 				logger.info("Company details does not exist");
 				throw new Exception("User details doesn't exist.");
 			}
-			if (!reqBean.getCompanyId().equalsIgnoreCase(user.getCompanyId())) {
+			if (!reqBean.getSchoolId().equalsIgnoreCase(user.getSchoolId())) {
 				logger.info("Company details does not exist");
 				throw new Exception("Company details are not matching.");
 			}
-			SchoolEntity company = companyDao.getCompanyDetails(user.getCompanyId());
+			SchoolEntity company = companyDao.getSchoolDetails(user.getSchoolId());
 			if (company == null) {
 				logger.info("Company details does not exist");
 				throw new Exception("Company details doesn't exist.");
@@ -171,11 +171,11 @@ public class UserService {
 			logger.info("Company details does not exist");
 			throw new Exception("User details doesn't exist.");
 		}
-		if (!reqBean.getCompanyId().equalsIgnoreCase(user.getCompanyId())) {
+		if (!reqBean.getSchoolId().equalsIgnoreCase(user.getSchoolId())) {
 			logger.info("Company details does not exist");
 			throw new Exception("Company details are not matching.");
 		}
-		SchoolEntity company = companyDao.getCompanyDetails(user.getCompanyId());
+		SchoolEntity company = companyDao.getSchoolDetails(user.getSchoolId());
 		if (company == null) {
 			logger.info("Company details does not exist");
 			throw new Exception("Company details doesn't exist.");
@@ -253,7 +253,7 @@ public class UserService {
 				logger.info("Customer is not active.");
 				throw new Exception("Customer is not active.");
 			}
-			companyId = customer.getCompanyId();
+			companyId = customer.getSchoolId();
 		} else {
 			logger.info("User login..");
 			user = userDao.getUserInfo(req.getUserId());
@@ -265,14 +265,14 @@ public class UserService {
 				logger.info("User is not active.");
 				throw new Exception("User is not active.");
 			}
-			companyId = user.getCompanyId();
+			companyId = user.getSchoolId();
 		}
 		logger.info("Fetching  company details.....");
 		if (companyId == null || companyId.isEmpty() || "null".equalsIgnoreCase(companyId)) {
 			logger.info("Company details does not exist");
 			throw new Exception("Credentials not recognised.");
 		}
-		SchoolEntity company = companyDao.getCompanyDetails(companyId);
+		SchoolEntity company = companyDao.getSchoolDetails(companyId);
 		if (company == null) {
 			logger.info("Company details does not exist");
 			throw new Exception("Company doesn't exist.");
@@ -332,7 +332,7 @@ public class UserService {
 			}
 		}
 		resp = new VerifyUserResp();
-		resp.setCompanyId(company.getCompanyId());
+		resp.setSchoolId(company.getSchoolId());
 		resp.setContactNumber(company.getContactNumber());
 		resp.setCountry(company.getCountry());
 		resp.setEmail(company.getEmailId());

@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class ActivateCompanyReq implements Serializable {
 
 	private long id;
-	private String companyId;
+	private String schoolId;
 	private String adminFirstName;
 	private String adminLastName;
 	private String adminMobile;
@@ -26,12 +26,12 @@ public class ActivateCompanyReq implements Serializable {
 
 
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String companyId) {
+		this.schoolId = companyId;
 	}
 
 	public String getAdminFirstName() {

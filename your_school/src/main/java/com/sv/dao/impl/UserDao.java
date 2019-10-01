@@ -134,13 +134,13 @@ public class UserDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<UserEntity> getUsers(String companyId) {
-		logger.info("inside dao getUsers() method:" + companyId);
+	public List<UserEntity> getUsers(String schoolId) {
+		logger.info("inside dao getUsers() method:" + schoolId);
 		Session session = null;
 		try {
 			session = sfUtil.getSession(AppConstants.DEFAULT_SCHEMA);
-			Query qry = session.createQuery("from UserEntity u where u.companyId=:companyId");
-			qry.setParameter("companyId", companyId);
+			Query qry = session.createQuery("from UserEntity u where u.schoolId=:schoolId");
+			qry.setParameter("schoolId", schoolId);
 			List<UserEntity> users = qry.list();
 			if (users != null) {
 				logger.info("Users exists, count:" + users.size());
@@ -160,7 +160,8 @@ public class UserDao {
 		Session session = null;
 		try {
 			session = sfUtil.getSession(AppConstants.DEFAULT_SCHEMA);
-			return (List<UserRoleEntity>) session.createQuery("from UserRoleEntity u where u.userId=:userId").setString("userId", userId).list();
+			return (List<UserRoleEntity>) session.createQuery("from UserRoleEntity u where u.userId=:userId")
+					.setString("userId", userId).list();
 		} catch (Exception ex) {
 			logger.error("error while fetching User roles:", ex);
 		} finally {

@@ -19,8 +19,8 @@ public class UserEntity implements Serializable {
 	@Column(name = "id")
 	private long id;
 
-	@Column(name = "company_id")
-	private String companyId;
+	@Column(name = "school_id")
+	private String schoolId;
 
 	@Column(name = "user_id")
 	private String userId;
@@ -36,7 +36,6 @@ public class UserEntity implements Serializable {
 
 	@Column(name = "created_date")
 	private String createdDateTime;
-	
 
 	public long getId() {
 		return id;
@@ -46,12 +45,12 @@ public class UserEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String companyId) {
+		this.schoolId = companyId;
 	}
 
 	public String getEmailId() {

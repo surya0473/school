@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 /*
  * @author surya v
  * @date 23/08/2019
@@ -21,8 +20,8 @@ public class CustomerEntity {
 	@Column(name = "id")
 	private long id;
 
-	@Column(name = "company_id")
-	private String companyId;
+	@Column(name = "school_id")
+	private String schoolId;
 
 	@Column(name = "mobile_no")
 	private String mobileNo;
@@ -37,8 +36,8 @@ public class CustomerEntity {
 		return id;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
 	public String getMobileNo() {
@@ -57,8 +56,8 @@ public class CustomerEntity {
 		this.id = id;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String companyId) {
+		this.schoolId = companyId;
 	}
 
 	public void setMobileNo(String mobileNo) {

@@ -6,12 +6,12 @@ import java.io.Serializable;
 public class RegComClientResp implements Serializable {
 
 	private long id;
-	private String companyId;
+	private String schoolId;
 	private String status;
 
 	@Override
 	public String toString() {
-		return "RegComClientResp [id=" + id + ", companyId=" + companyId + ", status=" + status + "]";
+		return "RegComClientResp [id=" + id + ", SchoolId=" + schoolId + ", status=" + status + "]";
 	}
 
 	public long getId() {
@@ -22,12 +22,12 @@ public class RegComClientResp implements Serializable {
 		this.id = id;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
 	}
 
 	public String getStatus() {

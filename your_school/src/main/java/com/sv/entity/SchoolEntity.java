@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "companies")
+@Table(name = "schools")
 public class SchoolEntity {
 
 	@Id
@@ -22,8 +22,8 @@ public class SchoolEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column(name = "company_id")
-	private String companyId;
+	@Column(name = "school_id")
+	private String schoolId;
 
 	@Column(name = "name")
 	private String name;
@@ -81,12 +81,11 @@ public class SchoolEntity {
 
 	@Column(name = "mapped_apps")
 	private String mappedApps;
-	
+
 	@Column(name = "region")
 	private String region;
-	
-	
-	@javax.persistence.Transient 
+
+	@javax.persistence.Transient
 	private int userCount;
 
 	public long getId() {
@@ -97,12 +96,12 @@ public class SchoolEntity {
 		this.id = id;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String companyId) {
+		this.schoolId = companyId;
 	}
 
 	public String getName() {
@@ -264,7 +263,7 @@ public class SchoolEntity {
 	public void setRegion(String region) {
 		this.region = region;
 	}
-	
+
 	public int getUserCount() {
 		return userCount;
 	}
@@ -275,7 +274,7 @@ public class SchoolEntity {
 
 	@Override
 	public String toString() {
-		return "CompanyEntity [id=" + id + ", companyId=" + companyId + ", name=" + name + ", emailId=" + emailId
+		return "CompanyEntity [id=" + id + ", schoolId=" + schoolId + ", name=" + name + ", emailId=" + emailId
 				+ ", contactNumber=" + contactNumber + ", website=" + website + ", address=" + address + ", country="
 				+ country + ", status=" + status + ", code=" + code + ", timeZone=" + timeZone + ", timeInterval="
 				+ timeInterval + ", currency=" + currency + ", currencyCode=" + currencyCode + ", currencySymbol="

@@ -21,7 +21,7 @@ import com.sv.entity.SchoolEntity;
 import com.sv.resp.bean.ActivateCompanyReq;
 import com.sv.resp.bean.ClientRespBean;
 import com.sv.resp.bean.CompanyRegReq;
-import com.sv.resp.bean.CompanyUpdateReq;
+import com.sv.resp.bean.SchoolUpdateReq;
 import com.sv.service.SchoolService;
 import com.sv.util.ClientRespUtil;
 
@@ -41,17 +41,17 @@ public class SchoolController {
 		logger.info("inside controller getAll method");
 		ClientRespBean respBean = null;
 		try {
-			List<SchoolEntity> companiesLst = service.getAll(status);
-			if (companiesLst == null || companiesLst.size() <= 0) {
+			List<SchoolEntity> schoolsLst = service.getAll(status);
+			if (schoolsLst == null || schoolsLst.size() <= 0) {
 				respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOLS_NOT_FOUND,
-						"No companies found");
+						"No schools found");
 			} else {
-				respBean = ClientRespUtil.getInstance().buildResp(companiesLst, AppConstants.STATUS_SUCCESS,
-						StatusConstants.SCHOOLS_FOUND, "companies found.");
+				respBean = ClientRespUtil.getInstance().buildResp(schoolsLst, AppConstants.STATUS_SUCCESS,
+						StatusConstants.SCHOOLS_FOUND, "schools found.");
 			}
 		} catch (Exception ex) {
 			logger.info("ex");
-			logger.info("error while getting companies:" + ex.getMessage());
+			logger.info("error while getting schools:" + ex.getMessage());
 			respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SYSTEM_ERROR,
 					"System error,please try again later.");
 		}
@@ -63,16 +63,16 @@ public class SchoolController {
 		logger.info("inside controller getSchoolDetails():" + schoolId);
 		ClientRespBean respBean = null;
 		try {
-			SchoolEntity School = service.getCompanyDetails(schoolId);
+			SchoolEntity School = service.getSchoolDetails(schoolId);
 			if (School == null) {
 				respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOLS_NOT_FOUND,
-						"No companies found");
+						"No schools found");
 			} else {
 				respBean = ClientRespUtil.getInstance().buildResp(School, AppConstants.STATUS_SUCCESS,
 						StatusConstants.SCHOOLS_FOUND, "School details found.");
 			}
 		} catch (Exception ex) {
-			logger.info("error while getting companies:" + ex.getMessage());
+			logger.info("error while getting schools:" + ex.getMessage());
 			respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SYSTEM_ERROR,
 					"System error,please try again later.");
 		}
@@ -84,16 +84,16 @@ public class SchoolController {
 		logger.info("inside controller getVerifySchool():" + domain);
 		ClientRespBean respBean = null;
 		try {
-			SchoolEntity School = service.verifyCompany(domain);
+			SchoolEntity School = service.verifySchool(domain);
 			if (School == null) {
 				respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOLS_NOT_FOUND,
-						"No companies found");
+						"No schools found");
 			} else {
 				respBean = ClientRespUtil.getInstance().buildResp(School, AppConstants.STATUS_SUCCESS,
 						StatusConstants.SCHOOLS_FOUND, "School details found.");
 			}
 		} catch (Exception ex) {
-			logger.info("error while getting companies:" + ex.getMessage());
+			logger.info("error while getting schools:" + ex.getMessage());
 			respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SYSTEM_ERROR,
 					"System error,please try again later.");
 		}
@@ -107,15 +107,15 @@ public class SchoolController {
 		try {
 			SchoolEntity School = service.register(req);
 			if (School == null) {
-				resp = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.COMPANY_REG_FAILED,
+				resp = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOL_REG_FAILED,
 						"Registration failed,Please try again later.");
 			} else {
-				resp = respUtil.buildResp(School, AppConstants.STATUS_SUCCESS, StatusConstants.COMPANY_REG_SUCCESS,
+				resp = respUtil.buildResp(School, AppConstants.STATUS_SUCCESS, StatusConstants.SCHOOL_REG_SUCCESS,
 						"Registration done successfully.");
 			}
 		} catch (Exception ex) {
 			logger.info("error:" + ex.getMessage());
-			resp = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.COMPANY_REG_FAILED,
+			resp = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOL_REG_FAILED,
 					ex.getMessage());
 		}
 		return respUtil.buildRetunResp(resp);
@@ -128,57 +128,57 @@ public class SchoolController {
 		try {
 			SchoolEntity School = service.activate(reqBean);
 			if (School == null) {
-				respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.COMPANY_ACT_FAILED,
+				respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOL_ACT_FAILED,
 						"Activation failed,Please try again later.");
 			} else {
-				respBean = respUtil.buildResp(School, AppConstants.STATUS_SUCCESS, StatusConstants.COMPANY_ACT_SUCCESS,
+				respBean = respUtil.buildResp(School, AppConstants.STATUS_SUCCESS, StatusConstants.SCHOOL_ACT_SUCCESS,
 						"Activated successfully.");
 			}
 		} catch (Exception ex) {
 			logger.info("error:" + ex.getMessage());
-			respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.COMPANY_ACT_FAILED,
+			respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOL_ACT_FAILED,
 					ex.getMessage());
 		}
 		return respUtil.buildRetunResp(respBean);
 	}
 
 	@PostMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ClientRespBean> update(@RequestBody CompanyUpdateReq req) {
+	public ResponseEntity<ClientRespBean> update(@RequestBody SchoolUpdateReq req) {
 		logger.info("inside update() :" + req.toString());
 		ClientRespBean resp = null;
 		try {
 			boolean isUpdated = service.update(req);
 			if (!isUpdated) {
-				resp = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.COMPANY_UPDATE_FAILED,
+				resp = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOL_UPDATE_FAILED,
 						"Update failed,Please try again later.");
 			} else {
-				resp = respUtil.buildResp(null, AppConstants.STATUS_SUCCESS, StatusConstants.COMPANY_UPDATE_SUCCESS,
+				resp = respUtil.buildResp(null, AppConstants.STATUS_SUCCESS, StatusConstants.SCHOOL_UPDATE_SUCCESS,
 						"Updated successfully.");
 			}
 		} catch (Exception ex) {
 			logger.info("error:" + ex.getMessage());
-			resp = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.COMPANY_UPDATE_FAILED,
+			resp = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOL_UPDATE_FAILED,
 					ex.getMessage());
 		}
 		return respUtil.buildRetunResp(resp);
 	}
 
 	@PostMapping(value = "/apps/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ClientRespBean> updateApps(@RequestBody CompanyUpdateReq reqBean) {
+	public ResponseEntity<ClientRespBean> updateApps(@RequestBody SchoolUpdateReq reqBean) {
 		logger.info("inside updateApps() :" + reqBean.toString());
 		ClientRespBean respBean = null;
 		try {
 			boolean isUpdated = service.updateApps(reqBean);
 			if (!isUpdated) {
-				respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.COMPANY_UPDATE_FAILED,
+				respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOL_UPDATE_FAILED,
 						"Update failed,Please try again later.");
 			} else {
-				respBean = respUtil.buildResp(null, AppConstants.STATUS_SUCCESS, StatusConstants.COMPANY_UPDATE_SUCCESS,
+				respBean = respUtil.buildResp(null, AppConstants.STATUS_SUCCESS, StatusConstants.SCHOOL_UPDATE_SUCCESS,
 						"Updated successfully.");
 			}
 		} catch (Exception ex) {
 			logger.info("error:" + ex.getMessage());
-			respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.COMPANY_UPDATE_FAILED,
+			respBean = respUtil.buildResp(null, AppConstants.STATUS_ERROR, StatusConstants.SCHOOL_UPDATE_FAILED,
 					ex.getMessage());
 		}
 		return respUtil.buildRetunResp(respBean);

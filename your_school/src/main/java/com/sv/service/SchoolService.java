@@ -16,7 +16,7 @@ import com.sv.entity.CountryEntity;
 import com.sv.entity.UserEntity;
 import com.sv.resp.bean.ActivateCompanyReq;
 import com.sv.resp.bean.CompanyRegReq;
-import com.sv.resp.bean.CompanyUpdateReq;
+import com.sv.resp.bean.SchoolUpdateReq;
 import com.sv.resp.bean.RegComClientResp;
 import com.sv.resp.bean.RegCompanyClientReq;
 import com.sv.util.ClientRestUtil;
@@ -40,17 +40,17 @@ public class SchoolService {
 		return companyEntyLst;
 	}
 
-	public SchoolEntity getCompanyDetails(String companyId) throws Exception {
+	public SchoolEntity getSchoolDetails(String companyId) throws Exception {
 		logger.info("inside service getCompanyDetails():" + companyId);
-		return dao.getCompanyDetails(companyId);
+		return dao.getSchoolDetails(companyId);
 	}
 
-	public SchoolEntity verifyCompany(String domain) throws Exception {
+	public SchoolEntity verifySchool(String domain) throws Exception {
 		logger.info("inside service verifyCompany():" + domain);
 		SchoolEntity company = dao.verify(domain);
 		if (company != null) {
 			logger.info("Company already exists, verifying super user..");
-			List<UserEntity> users = userDao.getUsers(company.getCompanyId());
+			List<UserEntity> users = userDao.getUsers(company.getSchoolId());
 			if (users != null) {
 				logger.info("Users exists, count:" + users.size());
 				company.setUserCount(users.size());
@@ -78,8 +78,8 @@ public class SchoolService {
 		}
 		company = new SchoolEntity();
 		String companyId = req.getWebsite().replace(".", "_").replace("-", "");
-		company.setCompanyId(companyId);
-		logger.info("Website:" + req.getWebsite() + ", Company Id:" + company.getCompanyId());
+		company.setSchoolId(companyId);
+		logger.info("Website:" + req.getWebsite() + ", Company Id:" + company.getSchoolId());
 		company.setName(req.getName());
 		company.setAddress(req.getAddress());
 		company.setContactNumber(req.getContactNo());
@@ -104,7 +104,7 @@ public class SchoolService {
 
 	public SchoolEntity activate(ActivateCompanyReq req) throws Exception {
 		logger.info("inside  update(): getting company details...");
-		SchoolEntity company = dao.getCompany(req.getId());
+		SchoolEntity company = dao.getSchool(req.getId());
 		if (company == null) {
 			logger.info("Company doesn't exists");
 			throw new Exception("Company doesn't exist.");
@@ -136,7 +136,7 @@ public class SchoolService {
 		clientReq.setAdminMobile(req.getAdminMobile());
 		clientReq.setAdminPassword(req.getAdminPassword());
 		clientReq.setCode(company.getCode());
-		clientReq.setCompanyId(company.getCompanyId());
+		clientReq.setSchoolId(company.getSchoolId());
 		clientReq.setContactNumber(company.getContactNumber());
 		clientReq.setCountry(company.getCountry());
 		clientReq.setCreatedDate(company.getCreatedDate());
@@ -155,7 +155,7 @@ public class SchoolService {
 		logger.info("Calling routing url for creating company....");
 		RegComClientResp clientResp = clientUtil.regWithClient(company.getRoutingUrl(), clientReq);
 		logger.info("respFromClient:" + clientResp.toString());
-		if (clientResp.getCompanyId() != null
+		if (clientResp.getSchoolId() != null
 				&& AppConstants.STATUS_ACTIVE.equalsIgnoreCase(clientResp.getStatus())) {
 			logger.info("Company activated successfully..updating company...");
 			boolean isUpdated = dao.update(company);
@@ -164,9 +164,9 @@ public class SchoolService {
 		return null;
 	}
 
-	public boolean update(CompanyUpdateReq req) throws Exception {
+	public boolean update(SchoolUpdateReq req) throws Exception {
 		logger.info("inside  update(): getting company details...");
-		SchoolEntity company = dao.getCompanyDetails(req.getCompanyId());
+		SchoolEntity company = dao.getSchoolDetails(req.getSchoolId());
 		if (company == null) {
 			logger.info("Company doesn't exists");
 			throw new Exception("Company doesn't exist.");
@@ -219,7 +219,7 @@ public class SchoolService {
 		RegCompanyClientReq clientReq = new RegCompanyClientReq();
 		clientReq.setAddress(company.getAddress());
 		clientReq.setCode(company.getCode());
-		clientReq.setCompanyId(company.getCompanyId());
+		clientReq.setSchoolId(company.getSchoolId());
 		clientReq.setContactNumber(company.getContactNumber());
 		clientReq.setCountry(company.getCountry());
 		clientReq.setCurrency(company.getCurrency());
@@ -242,9 +242,9 @@ public class SchoolService {
 		return false;
 	}
 
-	public boolean updateApps(CompanyUpdateReq reqBean) throws Exception {
+	public boolean updateApps(SchoolUpdateReq reqBean) throws Exception {
 		logger.info("inside  updateApps(): getting company details...");
-		SchoolEntity company = dao.getCompany(reqBean.getId());
+		SchoolEntity company = dao.getSchool(reqBean.getId());
 		if (company == null) {
 			logger.info("Company doesn't exists");
 			throw new Exception("Company doesn't exist.");

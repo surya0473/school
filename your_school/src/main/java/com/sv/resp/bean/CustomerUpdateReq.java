@@ -5,13 +5,13 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class CustomerUpdateReq implements Serializable {
 
-	private String companyId;
+	private String schoolId;
 	private String mobileNo;
 	private String newMobileNo;
 	private String status;
 
-	public String getCompanyId() {
-		return companyId;
+	public String getSchoolId() {
+		return schoolId;
 	}
 
 	public String getMobileNo() {
@@ -26,8 +26,8 @@ public class CustomerUpdateReq implements Serializable {
 		return status;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
 	}
 
 	public void setMobileNo(String mobileNo) {

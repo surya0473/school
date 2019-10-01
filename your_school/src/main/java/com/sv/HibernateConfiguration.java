@@ -3,7 +3,7 @@ package com.sv;
 import java.util.Properties;
 
 import javax.naming.NamingException;
-
+import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,17 +12,18 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfiguration {
 
+	@Autowired
+	private DataSource datasource;
 
 	@Bean
 	public SessionFactory sessionFactory() throws NamingException {
 		LocalSessionFactoryBean localSessionFactory = new LocalSessionFactoryBean();
 		try {
-			localSessionFactory.setDataSource(dataSourceUtil().getDataSource());
+			localSessionFactory.setDataSource(datasource);
 			localSessionFactory.setPackagesToScan(new String[] { "com.sv.entity" });
 			localSessionFactory.setHibernateProperties(hibernateProperties());
 			localSessionFactory.afterPropertiesSet();
@@ -30,10 +31,6 @@ public class HibernateConfiguration {
 			e.printStackTrace();
 		}
 		return localSessionFactory.getObject();
-	}
-
-	public DataSourceUtil dataSourceUtil() {
-		return new DataSourceUtil();
 	}
 
 	private Properties hibernateProperties() {
@@ -46,6 +43,7 @@ public class HibernateConfiguration {
 		properties.put("hibernate.multi_tenant_connection_provider", "com.sv.MultiTenantProvider");
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.format_sql", "true");
+		properties.put("hibernate.hbm2ddl.auto", "create");
 		System.out.println("properties:" + properties);
 		return properties;
 	}

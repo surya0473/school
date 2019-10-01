@@ -9,10 +9,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.hibernate.service.spi.ServiceRegistryAwareService;
 import org.hibernate.service.spi.ServiceRegistryImplementor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @SuppressWarnings("serial")
 public class MultiTenantProvider implements MultiTenantConnectionProvider, ServiceRegistryAwareService {
 
+	@Autowired
 	private DataSource dataSource;
 
 	@Override
@@ -23,7 +25,7 @@ public class MultiTenantProvider implements MultiTenantConnectionProvider, Servi
 	@Override
 	public void injectServices(ServiceRegistryImplementor serviceRegistry) {
 		try {
-			dataSource = dataSourceUtil().getDataSource();
+			dataSource=dataSource;
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -54,6 +56,9 @@ public class MultiTenantProvider implements MultiTenantConnectionProvider, Servi
 	public Connection getConnection(String tenantIdentifier) throws SQLException {
 		final Connection connection = getAnyConnection();
 		try {
+			if (tenantIdentifier == null) {
+				tenantIdentifier = "school";
+			}
 			System.out.println("inside getConnection('" + tenantIdentifier + "')");
 			connection.createStatement().execute("USE  " + tenantIdentifier);
 		} catch (final Exception e) {
